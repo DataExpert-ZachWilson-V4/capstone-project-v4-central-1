@@ -37,6 +37,7 @@ This capstone project focuses on performing sentiment analysis on customer revie
 - Insights into what features or aspects (e.g., comfort, design, price) drive positive or negative sentiment.
 - Identification of emerging trends and consumer preferences in the sneaker market.
 
-## Conclusion
-This project will provide valuable insights for sneaker manufacturers and retailers to understand consumer sentiment and improve their products and marketing strategies accordingly.
-
+## 
+We expect to conduct a comprehensive analysis of consumer sentiment towards various sneaker brands and models based on Twitter data and Sneaker DB information.
+Insights into what features or aspects (e.g., comfort, design, price) drive positive or negative sentiment.
+Identification of emerging trends and consumer preferences in the sneaker market.
