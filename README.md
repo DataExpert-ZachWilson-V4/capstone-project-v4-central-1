@@ -85,7 +85,7 @@ The Healthcare Analytics Project aims to leverage electronic health record (EHR)
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)[height="300px"]
 
 
-[![Sneaker Heads](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)]
+[![Sneaker Heads](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)
 
 
 
