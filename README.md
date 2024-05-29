@@ -41,3 +41,8 @@ This capstone project focuses on performing sentiment analysis on customer revie
 We expect to conduct a comprehensive analysis of consumer sentiment towards various sneaker brands and models based on Twitter data and Sneaker DB information.
 Insights into what features or aspects (e.g., comfort, design, price) drive positive or negative sentiment.
 Identification of emerging trends and consumer preferences in the sneaker market.
+
+
+##Who we are
+
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)
