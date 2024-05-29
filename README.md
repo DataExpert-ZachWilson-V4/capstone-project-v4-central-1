@@ -46,5 +46,12 @@ Identification of emerging trends and consumer preferences in the sneaker market
 
 
 ##Who we are
+<img src="https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb664058" alt="Image Description" height="300">
 
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)
+
+
+# Option 2
+
+# Healthcare Analytics Project:
+Utilize electronic health record (EHR) data to analyze patient outcomes, disease patterns, and treatment efficacy.
