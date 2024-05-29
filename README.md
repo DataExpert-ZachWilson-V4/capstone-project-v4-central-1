@@ -9,6 +9,8 @@ This capstone project focuses on performing sentiment analysis on customer revie
 # Diagram 
 
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/3f55fbfc-18b0-43f2-af82-45c073d96115)
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/4eae2a7d-58dc-49ed-884c-c4b272a18b22)
+
 
 # Capstone Project: The Sentiment Analysis of Sneakers
 
