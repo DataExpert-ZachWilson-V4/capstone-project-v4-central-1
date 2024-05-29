@@ -60,6 +60,22 @@ This capstone project focuses on utilizing electronic health record (EHR) data t
    - **NHANES:** Collect data by api calls.
    - **MIMICC-III:**  
 
+## Methodology
+- **Data Collection:** Gather electronic health record (EHR) data from healthcare institutions, ensuring compliance with data privacy and security regulations.
+- **Data Preprocessing:** Clean and preprocess the collected EHR data to handle missing values, outliers, and ensure data quality.
+- **Statistical Analysis:** Utilize statistical methods and machine learning algorithms to analyze treatment effectiveness, disease patterns, and comorbidity impacts.
+- **Visualization:** Create visualizations such as charts, graphs, and heatmaps to illustrate findings and patterns in the data.
+- **Ethical Considerations:** Ensure ethical handling of patient data, anonymization where necessary, and adherence to HIPAA regulations.
+
+## Expected Outcomes
+- **Effective Treatments Identification:** Identify and rank the most effective treatments for specific diseases or conditions based on patient outcomes analysis.
+- **Insightful Disease Patterns Analysis:** Gain insights into how different disease patterns and comorbidities influence treatment efficacy and patient outcomes.
+- **Data-Driven Recommendations:** Provide data-driven recommendations to healthcare providers for improving treatment protocols and patient care strategies.
+
+## Summary
+The Healthcare Analytics Project aims to leverage electronic health record (EHR) data to enhance our understanding of effective treatments for various diseases, evaluate disease patterns' impact on treatment outcomes, and provide data-driven recommendations to optimize patient care. Through rigorous data analysis and statistical modeling, this project seeks to contribute valuable insights to the healthcare industry for improving treatment efficacy and patient outcomes.
+
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/fe383d7b-81e3-43de-b857-948de2c1a512)
 
 
 ##Who we are
