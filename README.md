@@ -45,13 +45,23 @@ Insights into what features or aspects (e.g., comfort, design, price) drive posi
 Identification of emerging trends and consumer preferences in the sneaker market.
 
 
-##Who we are
-<img src="https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb664058" alt="Image Description" height="300">
-
-![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)
-
-
 # Option 2
 
 # Healthcare Analytics Project:
-Utilize electronic health record (EHR) data to analyze patient outcomes, disease patterns, and treatment efficacy.
+
+This capstone project focuses on utilizing electronic health record (EHR) data to analyze patient outcomes, disease patterns, and treatment efficiency.
+
+## Objectives (To define)
+1. What are the most effective treatments for specific diseases or conditions, and how do they impact patient outcomes?
+2. How do different disease patterns and comorbidities affect treatment efficacy and patient outcomes?
+      
+1. **Data Collection:**
+   - **CDC:** Use the Twitter API to gather tweets mentioning various sneaker brands and models.
+   - **NHANES:** Collect data by api calls.
+   - **MIMICC-III:**  
+
+
+
+##Who we are
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)[height="300px"]
+
