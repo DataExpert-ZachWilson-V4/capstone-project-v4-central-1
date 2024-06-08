@@ -1,14 +1,28 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/1lXY_Wlg)
 
+## Who we are
+
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)
+
 # Option 1
 
 # The Sentiment Analysis of Sneakers: 
 
 This capstone project focuses on performing sentiment analysis on customer reviews and social media discussions about sneakers. The goal is to analyze public sentiment towards different sneaker brands, models, and releases, providing insights into consumer preferences and trends.
 
-# Diagram 
+# Diagrams
 
+### Data Architecture stack:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/6039558c-276b-4931-95c1-d4f1a6f9dc33)
+
+### Data Pipelines Diagram:
+#### V1
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/3f55fbfc-18b0-43f2-af82-45c073d96115)
+#### V2
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/f1198bd4-3848-4eab-a16d-e0ed7ad6fb00)
+
+
+### Conceptual Design Diagram:
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/4eae2a7d-58dc-49ed-884c-c4b272a18b22)
 
 
@@ -80,9 +94,7 @@ The Healthcare Analytics Project aims to leverage electronic health record (EHR)
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/fe383d7b-81e3-43de-b857-948de2c1a512)
 
 
-## Who we are
 
-![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)[height="300px"]
 
 
 [![Sneaker Heads](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)
