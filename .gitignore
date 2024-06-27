@@ -11,3 +11,9 @@ airflow.cfg
 airflow.db
 sneakers_catalog/
 twitter-test/
+*.parquet
+venv
+*.log
+target/
+dbt_packages/
+logs/

@@ -9,6 +9,7 @@ from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from include.central1.utils.glue_job_submission import create_glue_job
 
 root_s3_sneakers_key = "central1/sneakers_catalog/PARQUET/"
+root_s3_distinct_sneakers_key = "central1/distinct_sneakers/"
 root_s3_script_key = "central1/scripts/clean_sneakers_catalog_data.py"
 
 S3_BUCKET = Variable.get("AWS_S3_BUCKET_TABULAR")
@@ -56,6 +57,7 @@ def clean_sneakers_catalog_data():
                 "--ds": "{{ ds }}",
                 "--output_table": "jsgomez14.sneakers_catalog_cleaned",
                 "--sneakers_catalog": root_s3_sneakers_key,
+                "--distinct_sneakers": root_s3_distinct_sneakers_key,
                 "--s3_bucket": S3_BUCKET,
             }
 

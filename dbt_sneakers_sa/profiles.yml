@@ -1,0 +1,13 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      method: ldap 
+      user: 'support@eczachly.com/student'
+      password: 'trin0-supp0rt!'
+      host: "dataengineer-eczachly.trino.galaxy.starburst.io"
+      database: "academy"
+      schema: "{{ env_var('DBT_SCHEMA')}}"
+      port: 8443
+      threads: 4

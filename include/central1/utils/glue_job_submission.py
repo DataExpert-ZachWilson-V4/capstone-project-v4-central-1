@@ -56,6 +56,7 @@ def create_glue_job(
     aws_region,
     description='Transform CSV data to Parquet format',
     kafka_credentials=None,
+    additional_python_modules=None,
     **kwargs
 ):
     output_table = kwargs['dag_run'].conf.get('output_table', arguments.get('--output_table', '')) if 'dag_run' in kwargs else arguments.get('--output_table', '')
@@ -84,7 +85,6 @@ def create_glue_job(
 
     extra_jars = ','.join(extra_jars_list)
 
-    # ExtraPythonLibsS3Path = kwargs['extra_python_requirements']
     job_args = {
         'Description': description,
         'Role': 'AWSGlueServiceRole',
@@ -99,14 +99,14 @@ def create_glue_job(
         'DefaultArguments': {
             '--conf': spark_string,
             '--extra-jars': extra_jars,
-            # Install additional python modules: fuzzywuzzy, python-Levenshtein, spaCy
-            # '--additional-python-modules' : "fuzzywuzzy python-Levenshtein spacy",
-            
         },
         'GlueVersion': '4.0',
         'WorkerType': 'Standard',
         'NumberOfWorkers': 1
     }
+
+    if additional_python_modules:
+        job_args["DefaultArguments"]['--additional-python-modules'] = additional_python_modules
 
     logs_client = boto3.client('logs',
                                region_name=aws_region,

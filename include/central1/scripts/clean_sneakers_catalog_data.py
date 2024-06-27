@@ -5,7 +5,7 @@ from awsglue.job import Job
 from pyspark.sql import SparkSession
 from typing import Optional
 from pyspark.sql.dataframe import DataFrame
-from pyspark.sql.functions import explode, from_json, col, coalesce, to_date
+from pyspark.sql.functions import explode, from_json, col, coalesce, to_date, concat, lit
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, ArrayType
 import boto3
 
@@ -13,15 +13,17 @@ BRANDS = 'brands.parquet'
 SNEAKERS = '*/*.parquet'
 
 spark = (SparkSession.builder.getOrCreate())
-args = getResolvedOptions(sys.argv, ["JOB_NAME", "ds", 'output_table', "sneakers_catalog", "s3_bucket"])
+args = getResolvedOptions(sys.argv, ["JOB_NAME", "ds", 'output_table', "sneakers_catalog", "distinct_sneakers", "s3_bucket"])
 
 # Spark Args
 run_date = args['ds']
 output_table = args['output_table']
 sneakers_catalog = args['sneakers_catalog']
+distinct_sneakers = args['distinct_sneakers']
 S3_BUCKET = args['s3_bucket']
 
 s3_sneakers_catalog = f"s3://{S3_BUCKET}/{sneakers_catalog}"
+s3_distinct_sneakers = f"s3://{S3_BUCKET}/{distinct_sneakers}"
 
 brands = s3_sneakers_catalog + BRANDS
 sneakers = s3_sneakers_catalog + SNEAKERS
@@ -60,17 +62,36 @@ def clean_sneakers_raw(spark):
     )
     return df_sneakers
 
-# df_brands = clean_brands_raw(spark)
 
-# df_brands.writeTo(brand_table) \
-#     .tableProperty("write.spark.fanout.enabled", "true") \
-#     .createOrReplace()
+def get_distinct_brand_models(df):
+    # Select brand and model fields and concatenate them with a space between and then get distinct in pyspark with DataFrame API
+    df_resp = df.where("error IS NULL AND properties_error IS NULL")
+    df_resp = df_resp.select(
+        concat(col("brand"), lit(" "), col("model")).alias("brand_model")
+    ).distinct()
+    return df_resp
+
+
+df_brands = clean_brands_raw(spark)
+
+df_brands.writeTo(brand_table) \
+    .tableProperty("write.spark.fanout.enabled", "true") \
+    .createOrReplace()
 
 df_sneakers = clean_sneakers_raw(spark)
+df_distinct_brand_models = get_distinct_brand_models(df_sneakers)
+# Write df_distinct_brand_models dataframe as parquet in S3
+
+df_distinct_brand_models.writeTo("jsgomez14.distinct_brand_model") \
+    .tableProperty("write.spark.fanout.enabled", "true") \
+    .createOrReplace()
+    
+df_distinct_brand_models.write.parquet(s3_distinct_sneakers)
 
 df_sneakers.writeTo(sneakers_table) \
     .tableProperty("write.spark.fanout.enabled", "true") \
     .createOrReplace()
+    
 
 job = Job(glueContext)
 job.init(args["JOB_NAME"], args)
