@@ -26,7 +26,7 @@ def get_sentiment(text):
 sentiment_score_udf = udf(lambda x: get_sentiment(x), FloatType())
 
 def sentiment_analysis(df_tweets, input_table: str, output_table: str):
-    df_tweets = df_tweets.withColumn("tweet_sentiment", sentiment_score_udf(col("text")).alias("sentiment_score"))
+    df_tweets = df_tweets.withColumn("tweet_sentiment", sentiment_score_udf(col("text")))
     return df_tweets
 
 def get_tweets(spark, input_data_path: str):

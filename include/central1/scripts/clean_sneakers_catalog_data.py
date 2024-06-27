@@ -82,10 +82,6 @@ df_sneakers = clean_sneakers_raw(spark)
 df_distinct_brand_models = get_distinct_brand_models(df_sneakers)
 # Write df_distinct_brand_models dataframe as parquet in S3
 
-df_distinct_brand_models.writeTo("jsgomez14.distinct_brand_model") \
-    .tableProperty("write.spark.fanout.enabled", "true") \
-    .createOrReplace()
-    
 df_distinct_brand_models.write.parquet(s3_distinct_sneakers)
 
 df_sneakers.writeTo(sneakers_table) \

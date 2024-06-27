@@ -41,22 +41,18 @@ def get_tweets_output(nitter, sneaker):
         sleep(5)
     return output
 
-def consolidate_parquets(s3_bucket):
-    data = os.path.join("include", "central1", "tweets_data")
-    files = [os.path.join(data, f) for f in os.listdir(data) if f.endswith('.parquet')]
+def consolidate_parquets(s3_bucket, dag_start_date):
+    local_dir = f"central1/tweets_data/"
+    start_date = dag_start_date.strftime("%Y/%m/%d/")
+
+    tweets_path = os.path.join("include", local_dir, start_date)
+    files = [os.path.join(tweets_path, f) for f in os.listdir(tweets_path) if f.endswith('.parquet')]
     if not files:
         logging.warning("No files to consolidated.")
         return
     df = pl.read_parquet(files)
 
-    for col in df.columns:
-        if col in ('quoted-post', 'pictures', 'videos', 'gifs', 'replying-to', 'external-link'):
-            df = df.drop(col)
-
-    df = df.unnest("user")
-    df = df.unnest("stats")
-
-    consolidated_file_path = f"{data}tweets.parquet"
+    consolidated_file_path = f"{tweets_path}tweets.parquet"
     df.write_parquet(consolidated_file_path)
 
     #Load consolidated file to S3
@@ -74,6 +70,8 @@ def consolidate_parquets(s3_bucket):
     for f in files:
         os.remove(f)
     os.remove(consolidated_file_path)
+    # Return total df records
+    return df.shape[0]
     
 
 def scrape_tweets(sneakers, s3_bucket, dag_start_date):
@@ -115,6 +113,6 @@ def scrape_tweets(sneakers, s3_bucket, dag_start_date):
         total_tweets += len(tweets_output)
         load_current_tweets(tweets_output, dag_start_date, suffix)
     logging.info("Done. Total Tweets Loaded: %d", total_tweets)
-    consolidate_parquets(s3_bucket)
+    total_tweets = consolidate_parquets(s3_bucket, dag_start_date)
     return total_tweets > 0
 

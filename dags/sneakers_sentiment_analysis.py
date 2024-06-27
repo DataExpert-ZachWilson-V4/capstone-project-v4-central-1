@@ -21,7 +21,7 @@ N_SNEAKERS = 20
 
 root_s3_script_key = "central1/scripts/sneakers_sentiment_analysis.py"
 root_s3_distinct_sneakers_key = "central1/distinct_sneakers/"
-root_s3_tweets_key = "central1/tweets_data/tweets.parquet"
+root_s3_tweets_key = "central1/tweets_data/"
 
 
 def dbt_run_command(command) -> str:
@@ -119,23 +119,12 @@ def sneakers_sentiment_analysis():
         return s3_path_script
 
     @task()
-    def load_tweets_parquet():
-        s3_hook = S3Hook()
-        
-        local_data_path = os.path.join("include", root_s3_tweets_key)
-        s3_hook.load_file(
-            local_data_path,
-            root_s3_tweets_key,
-            bucket_name=S3_BUCKET,
-            replace=True,
-        )
-        s3_path = f"s3://{S3_BUCKET}/{root_s3_tweets_key}"
-        logging.info("Tweets %s successfully uploaded to %s", local_data_path, s3_path)
-        return root_s3_tweets_key
-
-    @task()
-    def submit_glue_job(s3_script, s3_tweets):
-        s3_tweets = root_s3_tweets_key # TODO: Remove this line
+    def submit_glue_job(*args, **kwargs):
+        # Get dag run start date, and at it to root_s3_tweets_key separated by year/month/day
+        dag_run = kwargs.get("dag_run")
+        dag_start_date = dag_run.start_date
+        s3_tweets = os.path.join(root_s3_tweets_key, dag_start_date.strftime("%Y/%m/%d"), "tweets.parquet")
+        s3_script = args[0]
 
         job_name = "incremental_sneakers_sentiment_analysis"
         script_path= s3_script
@@ -193,12 +182,17 @@ def sneakers_sentiment_analysis():
             cwd = PATH_TO_DBT_PROJECT,
         )(["deps","run -s sneakers_sa.marts.*"])
 
-    s3_script = load_script_s3()
-    s3_tweets = load_tweets_parquet()
-    glue_job = submit_glue_job(s3_script, s3_tweets)
+    dbt_run_snapshots = task.bash(
+            dbt_run_command, # Function that returns the dbt bash command to be executed
+            task_id = "dbt_run_snapshots",
+            cwd = PATH_TO_DBT_PROJECT,
+        )(["deps","snapshot -s sneakers_sa.*"])
 
-    extract_tweets(get_disctinct_sneakers()) >> [s3_tweets , glue_job]
-    glue_job >> [set_next_catalog_checkpoint(),dbt_run_stg_models] >> dbt_run_marts_models
+    s3_script = load_script_s3()
+
+    extract_tweets(get_disctinct_sneakers()) >>  submit_glue_job(s3_script) \
+        >> [set_next_catalog_checkpoint(),dbt_run_stg_models] >> dbt_run_marts_models \
+            >> dbt_run_snapshots
 
 
 

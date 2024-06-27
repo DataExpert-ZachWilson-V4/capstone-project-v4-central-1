@@ -2,7 +2,8 @@
 {{
     config(
         materialized='incremental',
-        unique_key='id'
+        unique_key='id',
+        incremental_strategy='merge'
     )
 }}
 
@@ -40,6 +41,6 @@ FROM clean_data
 
 {% if is_incremental() %}
 
-WHERE id NOT IN (SELECT id FROM {{ this }})
+WHERE TRUE
 
 {% endif %}
