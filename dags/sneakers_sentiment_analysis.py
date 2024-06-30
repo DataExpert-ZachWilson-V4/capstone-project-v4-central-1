@@ -176,6 +176,12 @@ def sneakers_sentiment_analysis():
             cwd = PATH_TO_DBT_PROJECT,
         )(["deps","run -s sneakers_sa.staging.*"])
 
+    dbt_test_stg_models = task.bash(
+            dbt_run_command, # Function that returns the dbt bash command to be executed
+            task_id = "dbt_test_stg_models",
+            cwd = PATH_TO_DBT_PROJECT,
+        )(["deps","test -s sneakers_sa.staging.*"])
+
     dbt_run_marts_models = task.bash(
             dbt_run_command, # Function that returns the dbt bash command to be executed
             task_id = "dbt_run_marts_models",
@@ -186,13 +192,13 @@ def sneakers_sentiment_analysis():
             dbt_run_command, # Function that returns the dbt bash command to be executed
             task_id = "dbt_run_snapshots",
             cwd = PATH_TO_DBT_PROJECT,
-        )(["deps","snapshot -s sneakers_sa.*"])
+        )(["deps","snapshot -s scd_twitter_user"])
 
     s3_script = load_script_s3()
 
     extract_tweets(get_disctinct_sneakers()) >>  submit_glue_job(s3_script) \
-        >> [set_next_catalog_checkpoint(),dbt_run_stg_models] >> dbt_run_marts_models \
-            >> dbt_run_snapshots
+        >> [set_next_catalog_checkpoint(),dbt_run_stg_models] >> dbt_test_stg_models >> \
+                dbt_run_marts_models >> dbt_run_snapshots
 
 
 

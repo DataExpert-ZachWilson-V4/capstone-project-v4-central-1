@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_raw__incremental_sneakers_twitter_sentiment_analysis
+    description: audit sneakers tweets sentiment analysis table
+    columns:
+      - name: model
+        data_tests:
+          - not_null
+      - name: link
+        data_tests:
+          - not_null
+          - unique
+      - name: text
+        data_tests:
+          - not_null
+      - name: tweet_sentiment
+        data_tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -1
+              max_value: 1

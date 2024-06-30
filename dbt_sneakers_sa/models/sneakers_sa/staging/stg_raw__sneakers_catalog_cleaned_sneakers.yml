@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_raw__sneakers_catalog_cleaned_sneakers
+    description: audit sneakers catalog table
+    columns:
+      - name: brand
+        data_tests:
+          - not_null:
+              config:          
+                where: '"error" IS NULL AND properties_error IS NULL'
+      - name: model
+        data_tests:
+          - not_null:
+              config:          
+                where: '"error" IS NULL AND properties_error IS NULL'

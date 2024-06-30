@@ -22,9 +22,9 @@ WITH agg_stg AS (
   LEFT JOIN {{ ref('dim_sneaker') }} AS S ON S.join_key = FCT.model
 )
 SELECT CASE 
+            WHEN GROUPING(brand, bucketized_sentiment, year_tweeted) = 0 THEN 'brand_sentiment_year'
             WHEN GROUPING(brand, bucketized_sentiment) = 0 THEN 'brand_sentiment'
             WHEN GROUPING(model, bucketized_sentiment) = 0 THEN 'model_sentiment'
-            WHEN GROUPING(brand, bucketized_sentiment, year_tweeted) = 0 THEN 'model_sentiment_year'
         END as aggregation_level,
         COALESCE(brand, 'Overall') AS brand,
         COALESCE(model, 'Overall') AS model,
@@ -33,10 +33,13 @@ SELECT CASE
         SUM(IF(is_pinned,1,0)) AS total_pinned,
         SUM(comments) AS total_comments,
         SUM(retweets) AS total_retweets,
-        SUM(likes) AS total_likes
+        SUM(likes) AS total_likes,
+        COUNT(CASE WHEN bucketized_sentiment = 'Positive' THEN 1 END) AS total_positive,
+        COUNT(CASE WHEN bucketized_sentiment = 'Neutral' THEN 1 END) AS total_neutral,
+        COUNT(CASE WHEN bucketized_sentiment = 'Negative' THEN 1 END) AS total_negative
 FROM agg_stg
 GROUP BY GROUPING SETS (
+  (brand, bucketized_sentiment, year_tweeted),
   (brand, bucketized_sentiment),
-  (model, bucketized_sentiment),
-  (brand, bucketized_sentiment, year_tweeted)
+  (model, bucketized_sentiment)
 )
