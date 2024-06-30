@@ -4,11 +4,11 @@
 
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/6fa52c9c-8930-4561-9d88-35ccb6640581)
 
-# Option 1
-
 # The Sentiment Analysis of Sneakers: 
 
 This capstone project focuses on performing sentiment analysis on customer reviews and social media discussions about sneakers. The goal is to analyze public sentiment towards different sneaker brands, models, and releases, providing insights into consumer preferences and trends.
+
+[![Sneaker Heads](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)
 
 # Diagrams
 
@@ -16,14 +16,20 @@ This capstone project focuses on performing sentiment analysis on customer revie
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/6039558c-276b-4931-95c1-d4f1a6f9dc33)
 
 ### Data Pipelines Diagram:
-#### V1
-![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/3f55fbfc-18b0-43f2-af82-45c073d96115)
-#### V2
-![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/f1198bd4-3848-4eab-a16d-e0ed7ad6fb00)
 
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/f1198bd4-3848-4eab-a16d-e0ed7ad6fb00)
 
 ### Conceptual Design Diagram:
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/4eae2a7d-58dc-49ed-884c-c4b272a18b22)
+
+### Data Diagrams:
+
+#### Sources:
+![Architecture Diagram - Sources Schemas](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/dda834ae-ee2e-49db-b61b-c8c13b5d6dec)
+
+#### Dimensional Model:
+
+![Architecture Diagram - Dimensional Model](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/281de38a-7afa-4abb-9a41-d9714269f635)
 
 
 # Capstone Project: The Sentiment Analysis of Sneakers
@@ -33,71 +39,67 @@ This capstone project focuses on performing sentiment analysis on customer revie
 
 ## Objectives
 1. **Data Collection:**
-   - **Twitter API:** Use the Twitter API to gather tweets mentioning various sneaker brands and models.
-   - **Sneaker Websites:** Collect data by web scraping sneaker websites which includes detailed information about different sneaker models, release dates, and other relevant metadata.
+   - **Tweets:** Use the Twitter API or any Tweets extractor alternative to gather tweets mentioning various sneaker brands and models.
+   - **Sneaker Website:** Collect data by web scraping sneaker a website which includes detailed information about different sneaker models, release dates, and other relevant data.
 
 2. **Data Cleaning and Preprocessing:** Clean and preprocess the collected data to remove noise, handle missing values, and prepare it for analysis. This includes tokenizing text, removing stop words, and handling special characters and hashtags.
 
 3. **Sentiment Analysis:** Use natural language processing (NLP) techniques and sentiment analysis models to classify the sentiment of the tweets and sneaker reviews as positive, negative, or neutral.
 
-4. **Trend Analysis:** Identify trends and patterns in the sentiment data over time, across different brands and models. Analyze how sentiment correlates with sneaker release dates, features, and other metadata from sneaker websites.
-
-5. **Visualization:** Create visualizations to present the findings, such as sentiment distribution, trend graphs, and word clouds highlighting common themes in the reviews and tweets.
+4. **Visualization:** Create visualizations to present the findings, such as sentiment distribution and trend graphs.
 
 ## Methodology
-- **Data Collection:** Utilize the Twitter API for gathering tweets and access sneaker websites for detailed sneaker information.
-- **Preprocessing:** Use Python libraries like Pandas and NLTK for data cleaning and preprocessing.
-- **Sentiment Analysis:** Implement sentiment analysis using pre-trained models like VADER or fine-tune BERT models for more accurate results.
-- **Visualization:** Use Matplotlib, Seaborn, and Plotly for creating insightful visualizations, presented in Tableau.
+- **Data Collection:** Scrape a sneakers catalog for detailed sneaker information and gather tweets related to each of these sneakers.
+- **Preprocessing:** Use PySpark to clean scraped sneakers catalog.
+- **Sentiment Analysis:** Implement sentiment analysis for each tweet obtained for each sneaker, create a key to join both datasets.
+- **Data Modeling:** Model data in a star schema, to get insights efficiently.
+- **Visualization:** Use a data viz tool to create dynamic dashboards based on modeled data.
 
 ## Expected Outcomes
 - A comprehensive analysis of consumer sentiment towards various sneaker brands and models based on Twitter data and sneaker website information.
-- Insights into what features or aspects (e.g., comfort, design, price) drive positive or negative sentiment.
+- Insights into what features or aspects drive positive or negative sentiment.
 - Identification of emerging trends and consumer preferences in the sneaker market.
 
-## 
-We expect to conduct a comprehensive analysis of consumer sentiment towards various sneaker brands and models based on Twitter data and Sneaker DB information.
-Insights into what features or aspects (e.g., comfort, design, price) drive positive or negative sentiment.
-Identification of emerging trends and consumer preferences in the sneaker market.
+## Current Outcomes:
 
+### Data Pipeline overview:
 
-# Option 2
+#### DAG 1: Exctact Load Sneakers Catalog to S3:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/d8f9315f-61b7-42c1-8202-3a9c4c03a236)
+1. Clean destination S3 folder.
+2. Convert local JSON files to PARQUET using Polars.
+3. Load PARQUETS to S3 destination folder.
 
-# Healthcare Analytics Project:
+#### DAG 2: Clean Sneakers Catalog data from S3 and load to Data Expert Data Warehouse:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/b45d6baa-35eb-4d9c-aae2-cce055cd0ae1)
 
-This capstone project focuses on utilizing electronic health record (EHR) data to analyze patient outcomes, disease patterns, and treatment efficiency.
+1. Load Glue PySpark job to S3
+2. Submit Glue PySpark job which read sneakers catalog data from S3, cleans it to a user friendly format and loads it to Data Expert Data Warehouse. Also, loads distinct sneakers models to S3 that will be used in the main pipeline as input.
 
-## Objectives (To define)
-1. What are the most effective treatments for specific diseases or conditions, and how do they impact patient outcomes?
-2. How do different disease patterns and comorbidities affect treatment efficacy and patient outcomes?
-      
-1. **Data Collection:**
-   - **CDC:** Use the Twitter API to gather tweets mentioning various sneaker brands and models.
-   - **NHANES:** Collect data by api calls.
-   - **MIMICC-III:**  
+#### DAG 3: Main Tweets Extractor and Sentiment Analyzer Pipeline:
 
-## Methodology
-- **Data Collection:** Gather electronic health record (EHR) data from healthcare institutions, ensuring compliance with data privacy and security regulations.
-- **Data Preprocessing:** Clean and preprocess the collected EHR data to handle missing values, outliers, and ensure data quality.
-- **Statistical Analysis:** Utilize statistical methods and machine learning algorithms to analyze treatment effectiveness, disease patterns, and comorbidity impacts.
-- **Visualization:** Create visualizations such as charts, graphs, and heatmaps to illustrate findings and patterns in the data.
-- **Ethical Considerations:** Ensure ethical handling of patient data, anonymization where necessary, and adherence to HIPAA regulations.
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/49d24435-c866-46c6-aeeb-72592c38ca51)
 
-## Expected Outcomes
-- **Effective Treatments Identification:** Identify and rank the most effective treatments for specific diseases or conditions based on patient outcomes analysis.
-- **Insightful Disease Patterns Analysis:** Gain insights into how different disease patterns and comorbidities influence treatment efficacy and patient outcomes.
-- **Data-Driven Recommendations:** Provide data-driven recommendations to healthcare providers for improving treatment protocols and patient care strategies.
+1. Get distinct sneakers models from S3. Take a slice of 20 sneakers that will be used downstream.
+2. For each sneaker, extracts tweets related to it. If tweets are found they're uploaded to S3.
+3. A glue PySpark is submitted, this will read found tweets from S3 and perform a sentiment analysis for each of them (which is a value from -1 to 1). Then load result to Data Expert's Data Warhouse.
+4. New slice from sneakers catalog is calculated, to be able to read a different slice of sneakers each DAG run. Parallely, dbt staging models are created.
+5. DBT tests are run, to make sure staging data is consistent to run the marts models (dimensions, facts, snapshots). If test fails will block marts runs.
+6. DBT marts are run, this include dimension tables and fact tables.
+7. DBT snapshots are run, this include an user scd.
 
-## Summary
-The Healthcare Analytics Project aims to leverage electronic health record (EHR) data to enhance our understanding of effective treatments for various diseases, evaluate disease patterns' impact on treatment outcomes, and provide data-driven recommendations to optimize patient care. Through rigorous data analysis and statistical modeling, this project seeks to contribute valuable insights to the healthcare industry for improving treatment efficacy and patient outcomes.
+### Data Quality:
 
-![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/fe383d7b-81e3-43de-b857-948de2c1a512)
+DBT tests and dbt expectations are used to submit DQ checks on our data sources, this will help to evaluate input data for our marts. Helps to make sure that marts get consistent data from our expected Data Quality rules.
 
-
+### Data Viz:
+- Preset data viz with different aggregation levels and multiple metrics and filters:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/670d4b50-96dc-4d6c-8ead-9100df8524df)
+- We can visualize the relationship between different metrics with the sentiment of a specific brand, model and year:
+- Metrics: Total retweets, total likes, total positive tweets, total negative tweets, total neutral tweets, and more... 
 
 
 
-[![Sneaker Heads](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/79658792/a1e4aee9-b06e-4b66-a098-ae075bd78c80)
 
 
 
