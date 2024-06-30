@@ -91,6 +91,16 @@ This capstone project focuses on performing sentiment analysis on customer revie
 ### Data Quality:
 
 DBT tests and dbt expectations are used to submit DQ checks on our data sources, this will help to evaluate input data for our marts. Helps to make sure that marts get consistent data from our expected Data Quality rules.
+Here examples of dq tests:
+#### Sneakers Catalog:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/3ebe23a9-a1c0-4dd8-be07-1d3c3a4fe423)
+- Verify if brand and model is not null ´´WHERE "error" IS NULL AND properties_error IS NULL´´
+#### Sneakers Tweets sentiment Analysis:
+![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/17de6ef6-2b32-4e41-971b-da9c835dccf4)
+- Verify if model is not null because it's the FK to the sneakers catalog.
+- Verify if link (tweet's url) is unique, because there's not different tweets with same url.
+- Verify if text is not null, because it's the input for the sentiment analysis.
+- Verify if tweet_sentiment is not null and is in -1 and 1 valid range.
 
 ### Data Viz:
 - Preset data viz with different aggregation levels and multiple metrics and filters:
