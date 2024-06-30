@@ -90,8 +90,8 @@ This capstone project focuses on performing sentiment analysis on customer revie
 
 ### Data Quality:
 
-DBT tests and dbt expectations are used to submit DQ checks on our data sources, this will help to evaluate input data for our marts. Helps to make sure that marts get consistent data from our expected Data Quality rules.
-Here examples of dq tests:
+DBT tests and dbt expectations are used to submit DQ checks on our data sources, this will help to evaluate input data for our marts. Helps to make sure that marts get consistent data from our expected Data Quality rules. Audit+Publish pattern was created with help of these.
+Here examples of DQ tests:
 #### Sneakers Catalog:
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/3ebe23a9-a1c0-4dd8-be07-1d3c3a4fe423)
 - Verify if brand and model is not null ´´WHERE "error" IS NULL AND properties_error IS NULL´´
@@ -106,7 +106,12 @@ Here examples of dq tests:
 - Preset data viz with different aggregation levels and multiple metrics and filters:
 ![image](https://github.com/DataExpert-ZachWilson-V4/capstone-project-v4-central-1/assets/16787672/670d4b50-96dc-4d6c-8ead-9100df8524df)
 - We can visualize the relationship between different metrics with the sentiment of a specific brand, model and year:
-- Metrics: Total retweets, total likes, total positive tweets, total negative tweets, total neutral tweets, and more... 
+- Metrics: Total retweets, total likes, total positive tweets, total negative tweets, total neutral tweets, and more...
+
+### Future Improvements:
+- Currently Sneaker's Catalog is a static data source scrapped a couple of months ago. Next big step should be to automate scraping of new sneakers releases.
+- Sentiment Analysis Model: The current model only supports English, we could use a multi-language model to improve tweet's sentiment quality.
+- Tweet's dataset size: Currently Twitter has very strict limitations to get tweet's data. Twitter API access is very expensive and other solutions have also provide a limited amount of tweets. Because of this, we got a small tweets dataset for the analysis.
 
 
 
